@@ -1,0 +1,22 @@
+{
+    "name": "B\u00fcrgerFit",
+    "short_name": "B\u00fcrgerFit",
+    "description": "Prepare for the German Einb\u00fcrgerungstest with B\u00fcrgerFit \u2013 an interactive quiz app covering civics, history, and regional knowledge. Track your progress and study smarter.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "/assets/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "lang": "en"
+}
