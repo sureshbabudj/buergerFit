@@ -79,10 +79,10 @@ export default function App() {
 
   return (
     <main className="flex flex-col lg:flex-row">
-      <section className="hidden h-screen w-full flex-col items-center justify-center bg-[#d6ebe9] p-9 lg:flex dark:bg-zinc-900">
+      <section className="hidden h-dvh w-full flex-col items-center justify-center bg-[#d6ebe9] p-9 lg:flex dark:bg-zinc-900">
         {activeQuestion && <Question question={activeQuestion} />}
       </section>
-      <section className="bale flex h-screen w-full flex-col justify-between p-9 lg:h-auto">
+      <section className="bale flex h-dvh w-full flex-col justify-between p-9 lg:h-auto">
         <div className="flex w-full items-center justify-between">
           <a
             className="flex items-center text-2xl font-bold dark:text-white"
