@@ -18,10 +18,11 @@ export function Options({
 }) {
   const { language } = useQuizStore();
   const { options, answer } = question;
+
   return (
     <div className="my-4">
       <RadioGroup
-        defaultValue="comfortable"
+        value={selectedOption?.id ?? ""}
         onValueChange={(option) => {
           const selected = options.find((i) => option === i.id);
           if (selected) {
@@ -35,12 +36,12 @@ export function Options({
             className={cn(
               "flex items-center gap-2 hover:cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md p-3",
               {
-                "bg-green-500 text-white":
+                "bg-green-500 text-white hover:bg-green-500":
                   highlightAnswer && answer === option.de,
-                "bg-red-500 text-white":
+                "bg-red-500 text-white hover:bg-red-500":
                   highlightAnswer &&
-                  answer !== option.de &&
-                  selectedOption?.id === option.id,
+                  selectedOption?.id === option.id &&
+                  answer !== option.de,
               }
             )}
           >
@@ -49,7 +50,9 @@ export function Options({
               id={option.id}
               disabled={highlightAnswer}
             />
-            <Label htmlFor={option.id}> {option[language]}</Label>
+            <Label htmlFor={option.id} className="block w-full">
+              {option[language]}
+            </Label>
           </div>
         ))}
       </RadioGroup>
