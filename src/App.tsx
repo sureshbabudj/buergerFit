@@ -5,7 +5,6 @@ import { Question } from "./components/Question";
 import { Tabs } from "./components/Tabs";
 import { useQuizStore } from "./lib/store";
 import type { AttemptedQuestion, OptionType } from "./types";
-import { Button } from "./components/ui/button";
 import { LanguageSelector } from "./components/LanguageSelector";
 import { Tools } from "./components/Tools";
 import { Nav } from "./components/Nav";
@@ -28,7 +27,12 @@ export default function App() {
 
   const activeQuestion = getActiveQuestion();
 
-  const checkAnswer = () => {
+  const submitAnswer = (option: OptionType) => {
+    setSelectedOption(option);
+    checkAnswer(option);
+  };
+
+  const checkAnswer = (selectedOption: OptionType) => {
     if (highlightAnswer) {
       toast.info("You have already checked the answer");
     }
@@ -113,7 +117,7 @@ export default function App() {
           {activeQuestion && (
             <Options
               question={activeQuestion}
-              setSelectedOption={setSelectedOption}
+              setSelectedOption={submitAnswer}
               highlightAnswer={highlightAnswer}
               selectedOption={selectedOption}
             />
@@ -121,11 +125,6 @@ export default function App() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <div className="w-full max-w-md mx-auto">
-            <Button className="w-full" onClick={checkAnswer}>
-              Submit
-            </Button>
-          </div>
           <Tools />
           <Nav reset={reset} />
         </div>

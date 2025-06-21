@@ -2,25 +2,29 @@ import { Button } from "./ui/button";
 import { useQuizStore } from "../lib/store";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import type { LanguageType } from "@/types";
+import { LanguagesIcon } from "lucide-react";
 
 export function LanguageSelector() {
   const { language, setLanguage } = useQuizStore();
   return (
     <ToggleGroup
-      defaultValue={language}
+      value={language}
       variant="outline"
       type="single"
       size="sm"
       onValueChange={(e) => {
-        setLanguage(e as LanguageType);
+        if (e === "en") {
+          setLanguage("en");
+        } else {
+          setLanguage("de");
+        }
       }}
     >
-      <ToggleGroupItem value="de" aria-label="Toggle German">
-        DE
-      </ToggleGroupItem>
-      <ToggleGroupItem value="en" aria-label="Toggle English">
-        EN
+      <ToggleGroupItem
+        value="en"
+        aria-label={language === "de" ? "Toggle English" : "Toggle German"}
+      >
+        <LanguagesIcon className="h-4 w-4" />
       </ToggleGroupItem>
     </ToggleGroup>
   );

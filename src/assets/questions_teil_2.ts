@@ -331,7 +331,7 @@ export const questionWithIds: QuestionType[] = [
         id: "310-3",
       },
     ],
-    answer: "Bild 4",
+    answer: "Bild 2",
     id: "310",
   },
   {
@@ -542,7 +542,7 @@ export const questionWithIds: QuestionType[] = [
         id: "317-3",
       },
     ],
-    answer: "3",
+    answer: "4",
     id: "317",
   },
   {
