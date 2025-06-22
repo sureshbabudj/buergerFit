@@ -12,13 +12,13 @@ import { Tabs } from "./Tabs";
 
 export function MobileDrawer({ reset }: { reset: () => void }) {
   return (
-    <Drawer direction={"left"}>
+    <Drawer>
       <DrawerTrigger asChild>
         <Button variant="outline" className="p-2">
           <MenuIcon />
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="flex w-[300px] h-full min-w-auto rounded-none">
+      <DrawerContent className="h-[calc(100dvh-100px)]">
         <div className=" mx-auto w-full max-w-sm ">
           <DrawerHeader className="flex items-center justify-between">
             <DrawerTitle>Settings</DrawerTitle>
