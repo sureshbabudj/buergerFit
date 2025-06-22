@@ -6,6 +6,7 @@ import type {
   LanguageType,
   QuestionType,
   TeilType,
+  AttemptedMockTest,
 } from "../types";
 
 const QUIZ_STORE_NAME = "quiz-store";
@@ -27,6 +28,8 @@ export interface QuizStore {
   getActiveQuestion: () => QuestionType | null;
   showAnalytics: boolean;
   setShowAnalytics: (v: boolean) => void;
+  attemptedMockTests: AttemptedMockTest[];
+  setAttemptedMockTests: (attemptedMockTest: AttemptedMockTest) => void;
 }
 
 export const useQuizStore = create<QuizStore>()(
@@ -92,6 +95,14 @@ export const useQuizStore = create<QuizStore>()(
         },
         showAnalytics: false,
         setShowAnalytics: (v) => set({ showAnalytics: v }),
+        attemptedMockTests: [],
+        setAttemptedMockTests: (attemptedMockTest) =>
+          set((state) => ({
+            attemptedMockTests: [
+              ...state.attemptedMockTests,
+              attemptedMockTest,
+            ],
+          })),
       }),
       {
         name: QUIZ_STORE_NAME,
@@ -101,6 +112,7 @@ export const useQuizStore = create<QuizStore>()(
           chosenRegion: state.chosenRegion,
           activeQuestionTeil1: state.activeQuestionTeil1,
           activeQuestionTeil2: state.activeQuestionTeil2,
+          attemptedMockTests: state.attemptedMockTests,
         }),
       }
     )

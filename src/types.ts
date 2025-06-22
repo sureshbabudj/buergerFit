@@ -32,3 +32,9 @@ export interface AttemptedQuestion {
 }
 
 export type LanguageType = "de" | "en";
+
+export interface AttemptedMockTest {
+  date: string;
+  score: number;
+  region: string;
+}

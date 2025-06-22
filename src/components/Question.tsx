@@ -17,8 +17,12 @@ export function Question({ question }: { question: QuestionType }) {
         {q[language]}
       </p>
       {q.image && (
-        <div className="p-3 rounded-md object-cover bg-zinc-100 dark:bg-zinc-800">
-          <img src={`images/${q.image}`} alt={q[language]} />
+        <div className="flex justify-center">
+          <img
+            src={`images/${q.image}`}
+            alt={q[language]}
+            className="lg:max-h-72 p-3 rounded-md object-contain bg-zinc-100 dark:bg-zinc-800"
+          />
         </div>
       )}
     </div>
