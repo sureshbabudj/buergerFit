@@ -36,9 +36,9 @@ export function Options({
             className={cn(
               "flex items-center gap-2 hover:cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md p-3",
               {
-                "bg-green-500 text-white hover:bg-green-500":
+                "!bg-green-500 !text-white":
                   highlightAnswer && answer === option.de,
-                "bg-red-500 text-white hover:bg-red-500":
+                "!bg-red-500 t!ext-white":
                   highlightAnswer &&
                   selectedOption?.id === option.id &&
                   answer !== option.de,

@@ -3,6 +3,9 @@ import { formatDistanceToNow } from "date-fns";
 import { Badge } from "./ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "./ui/button";
+import { BarChart3 } from "lucide-react";
+import { ProgressAnalytics } from "./ProgressAnalytics";
 
 export function Tools() {
   const {
@@ -11,7 +14,10 @@ export function Tools() {
     getActiveQuestion,
     currentTeil,
     chosenRegion,
+    showAnalytics,
+    setShowAnalytics,
   } = useQuizStore();
+
   const attemptedQuestionsTeil = Object.values(attemptedQuestions).filter(
     (i) =>
       i.teil === currentTeil &&
@@ -19,6 +25,24 @@ export function Tools() {
   );
   const progress = (attemptedQuestionsTeil.length / questions.length) * 100;
   const activeQuestion = getActiveQuestion();
+
+  if (showAnalytics) {
+    return (
+      <div className="space-y-4 my-2">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">Progress Analytics</h2>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowAnalytics(false)}
+          >
+            Back to Quiz
+          </Button>
+        </div>
+        <ProgressAnalytics />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -65,6 +89,18 @@ export function Tools() {
             </div>
           )}
       </div>
+
+      {/* Analytics Button */}
+      <Button
+        variant="outline"
+        size="sm"
+        className="w-full mb-2"
+        onClick={() => setShowAnalytics(true)}
+      >
+        <BarChart3 className="h-4 w-4 mr-2" />
+        View Detailed Analytics
+      </Button>
+
       <Separator orientation="horizontal" />
     </>
   );

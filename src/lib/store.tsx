@@ -25,6 +25,8 @@ export interface QuizStore {
   activeQuestionTeil2: QuestionType | null;
   setActiveQuestion: (question: QuestionType) => void;
   getActiveQuestion: () => QuestionType | null;
+  showAnalytics: boolean;
+  setShowAnalytics: (v: boolean) => void;
 }
 
 export const useQuizStore = create<QuizStore>()(
@@ -88,6 +90,8 @@ export const useQuizStore = create<QuizStore>()(
             }
           }
         },
+        showAnalytics: false,
+        setShowAnalytics: (v) => set({ showAnalytics: v }),
       }),
       {
         name: QUIZ_STORE_NAME,

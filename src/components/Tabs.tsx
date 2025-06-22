@@ -8,14 +8,6 @@ import {
 
 import { Tabs as TabsUI, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { QuestionType, TeilType } from "@/types";
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +17,9 @@ import {
 import { Button } from "./ui/button";
 import { MapIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 
 export function SelectRegion({
   handleActiveRegion,
@@ -48,18 +43,26 @@ export function SelectRegion({
   };
 
   return (
-    <Select defaultValue={chosenRegion} onValueChange={handleRegionSelection}>
-      <SelectTrigger className="w-[180px] ml-2 text-sm">
-        <SelectValue placeholder="Choose Region" />
-      </SelectTrigger>
-      <SelectContent>
+    <ScrollArea className="h-72 w-full rounded-md border">
+      <div className="p-4">
+        <h4 className="mb-4 text-sm leading-none font-medium">Choose Region</h4>
         {regions.map((region) => (
-          <SelectItem value={region} key={region}>
-            {region}
-          </SelectItem>
+          <React.Fragment key={region}>
+            <div
+              className={cn("text-sm cursor-pointer", {
+                "text-blue-600": chosenRegion === region,
+              })}
+              onClick={() => {
+                handleRegionSelection(region);
+              }}
+            >
+              {region}
+            </div>
+            <Separator className="my-2" />
+          </React.Fragment>
         ))}
-      </SelectContent>
-    </Select>
+      </div>
+    </ScrollArea>
   );
 }
 
@@ -133,7 +136,7 @@ export function Tabs({
   }, [currentTeil]);
 
   return (
-    <div className={cn("flex items-center gap-2", className)} {...props}>
+    <div className={cn("flex lg:items-center gap-2", className)} {...props}>
       <span>Teil: </span>
       <TabsUI
         defaultValue={currentTeil}
@@ -162,9 +165,10 @@ export function Tabs({
                   <DropdownMenuItem
                     key={region}
                     onClick={() => handleRegionSelection(region)}
-                  className= {cn(
-                    "cursor-pointer",
-                    chosenRegion === region ? "bg-blue-500 text-white" : "")}
+                    className={cn(
+                      "cursor-pointer",
+                      chosenRegion === region ? "bg-blue-500 text-white" : ""
+                    )}
                   >
                     {region}
                   </DropdownMenuItem>

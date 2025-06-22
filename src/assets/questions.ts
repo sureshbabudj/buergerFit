@@ -2168,7 +2168,7 @@ const questions: QuestionType[] = [
         id: "71-3",
       },
     ],
-    answer: "Angela Merkel",
+    answer: "Friedrich Merz",
     id: "71",
   },
   {
