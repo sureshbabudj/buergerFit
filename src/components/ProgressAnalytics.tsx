@@ -23,6 +23,7 @@ import {
   Award,
   InfoIcon,
   SendIcon,
+  ListCheck,
 } from "lucide-react";
 import type { AttemptedQuestion } from "@/types";
 
@@ -62,6 +63,7 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "./ui/separator";
 import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 export function QuestionInformation({
   questions,
@@ -114,6 +116,59 @@ export function QuestionInformation({
         </div>
       </PopoverContent>
     </Popover>
+  );
+}
+
+export function MockTestAnalytics() {
+  const { attemptedMockTests } = useQuizStore();
+  if (attemptedMockTests.length === 0) return null;
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2">
+          <ListCheck className="h-5 w-5" />
+          Mock Test Analytics
+        </CardTitle>
+        <CardDescription>
+          Your mock test results and performance over time
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        {/* Responsive Table of mock tests */}
+
+        <table className="table-auto md:table-fixed w-full">
+          <thead>
+            <tr className="border-b border-gray-200 dark:border-gray-700">
+              <th className="text-left w-1/3 py-2">Date</th>
+              <th className="text-left w-1/3 py-2">Region</th>
+              <th className="text-right w-1/3 py-2">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {attemptedMockTests.map((test) => (
+              <tr
+                key={test.date}
+                className="border-b border-gray-200 dark:border-gray-700"
+              >
+                <td className="text-left w-6/12 py-2">
+                  {format(new Date(test.date), "do MMM, yyyy k:m")}
+                </td>
+                <td className="text-left w-4/12 py-2">{test.region}</td>
+                <td
+                  className={cn("text-right w-2/12 py-2", {
+                    // minimun 17 questions out of 33 questions
+                    "text-green-500": test.score > 50,
+                    "text-red-500": test.score < 50,
+                  })}
+                >
+                  {test.score.toFixed(1)}%
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </CardContent>
+    </Card>
   );
 }
 
@@ -522,6 +577,8 @@ export function ProgressAnalytics() {
             </div>
           </CardContent>
         </Card>
+
+        <MockTestAnalytics />
       </div>
     </ScrollArea>
   );

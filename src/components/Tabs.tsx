@@ -25,7 +25,7 @@ export function SelectRegion({
   handleActiveRegion,
   reset,
 }: {
-  handleActiveRegion: (region?: string) => {
+  handleActiveRegion?: (region?: string) => {
     filteredQuestions: QuestionType[];
     activeQuestion: QuestionType;
   };
@@ -37,9 +37,11 @@ export function SelectRegion({
   const handleRegionSelection = (value: string) => {
     reset();
     setChosenRegion(value);
-    const { filteredQuestions, activeQuestion } = handleActiveRegion(value);
-    setQuestions(filteredQuestions);
-    setActiveQuestion(activeQuestion);
+    if (handleActiveRegion) {
+      const { filteredQuestions, activeQuestion } = handleActiveRegion(value);
+      setQuestions(filteredQuestions);
+      setActiveQuestion(activeQuestion);
+    }
   };
 
   return (
