@@ -33,6 +33,7 @@ import {
   regions,
 } from "@/assets/questions_teil_2";
 import { SelectRegion } from "@/components/Tabs";
+import { Separator } from "@/components/ui/separator";
 
 interface MockTestState {
   currentQuestionIndex: number;
@@ -201,7 +202,7 @@ export function MockTestPage() {
   // Show region selection if no region is chosen
   if (!chosenRegion) {
     return (
-      <div className="min-h-screen bg-background p-4">
+      <div className="min-h-dvh bg-background p-4">
         <div className="container mx-auto max-w-4xl">
           <div className="mb-8">
             <Header reset={() => {}} />
@@ -247,7 +248,7 @@ export function MockTestPage() {
   // Show test setup if not started
   if (!testState.startTime) {
     return (
-      <div className="min-h-screen bg-background p-4">
+      <div className="min-h-dvh bg-background p-4">
         <div className="container mx-auto max-w-4xl">
           <div className="mb-8">
             <Header reset={() => {}} />
@@ -295,7 +296,7 @@ export function MockTestPage() {
   // Show results
   if (testState.showResults) {
     return (
-      <div className="min-h-screen bg-background p-4">
+      <div className="min-h-dvh bg-background p-4">
         <div className="container mx-auto max-w-4xl">
           <div className="mb-8">
             <Header reset={() => {}} />
@@ -367,28 +368,16 @@ export function MockTestPage() {
 
   // Show test interface
   return (
-    <div className="min-h-screen bg-background">
-      <div className="flex flex-col lg:flex-row h-screen">
+    <div className="min-h-dvh bg-background">
+      <div className="flex flex-col lg:flex-row h-dvh">
         {/* Question Display */}
-        <section className="hidden h-screen w-full flex-col items-center justify-center bg-[#d6ebe9] p-9 lg:flex dark:bg-zinc-900">
+        <section className="hidden h-dvh w-full flex-col items-center justify-center bg-[#d6ebe9] p-9 lg:flex dark:bg-zinc-900">
           {currentQuestion && <Question question={currentQuestion} />}
         </section>
 
         {/* Test Interface */}
-        <section className="flex h-screen w-full flex-col justify-between p-9 lg:h-auto">
+        <section className="flex h-dvh w-full flex-col justify-between p-9 lg:h-auto">
           <Header reset={() => {}} />
-
-          {/* Progress Bar */}
-          <div className="mb-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium">
-                Question {testState.currentQuestionIndex + 1} of{" "}
-                {totalQuestions}
-              </span>
-              <Badge variant="outline">{Math.round(progress)}% Complete</Badge>
-            </div>
-            <Progress value={progress} className="h-2" />
-          </div>
 
           {/* Question */}
           <div>
@@ -412,40 +401,64 @@ export function MockTestPage() {
             )}
           </div>
 
-          {/* Navigation */}
-          <div className="flex justify-between items-center mt-6">
-            <Button
-              onClick={previousQuestion}
-              disabled={testState.currentQuestionIndex === 0}
-              variant="outline"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Previous
-            </Button>
-
-            <div className="text-sm text-muted-foreground">
-              {testState.answers.filter((answer) => answer !== null).length} of{" "}
-              {totalQuestions} answered
+          <div>
+            {/* Progress Bar */}
+            <div className="mb-4">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm font-medium">
+                  Question {testState.currentQuestionIndex + 1} of{" "}
+                  {totalQuestions}
+                </span>
+                <Badge variant="outline">
+                  {Math.round(progress)}% Complete
+                </Badge>
+              </div>
+              <Progress value={progress} className="h-2" />
             </div>
 
-            <Button
-              onClick={nextQuestion}
-              disabled={
-                testState.answers[testState.currentQuestionIndex] === null
-              }
-            >
-              {testState.currentQuestionIndex === totalQuestions - 1 ? (
-                <>
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  Finish Test
-                </>
-              ) : (
-                <>
-                  Next
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </>
-              )}
-            </Button>
+            <Separator />
+
+            {/* Navigation */}
+            <div className="flex justify-between items-center mt-6">
+              <Button
+                onClick={previousQuestion}
+                disabled={testState.currentQuestionIndex === 0}
+                variant="outline"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                <span className="text-sm font-medium hidden lg:inline">
+                  Previous
+                </span>
+              </Button>
+
+              <div className="text-sm text-muted-foreground">
+                {testState.answers.filter((answer) => answer !== null).length}{" "}
+                of {totalQuestions} answered
+              </div>
+
+              <Button
+                onClick={nextQuestion}
+                disabled={
+                  testState.answers[testState.currentQuestionIndex] === null
+                }
+              >
+                {testState.currentQuestionIndex === totalQuestions - 1 ? (
+                  <>
+                    <CheckCircle className="h-4 w-4 mr-2" />
+                    <span className="text-sm font-medium hidden lg:inline">
+                      Finish Test
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-sm font-medium hidden lg:inline">
+                      Next
+                    </span>
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
         </section>
       </div>

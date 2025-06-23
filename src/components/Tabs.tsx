@@ -135,6 +135,7 @@ export function Tabs({
 
   useEffect(() => {
     handleTeilSelection(currentTeil);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTeil]);
 
   return (

@@ -14,7 +14,7 @@ export function AboutPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#d6ebe9] to-green-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-dvh bg-gradient-to-br from-[#d6ebe9] to-green-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
@@ -101,6 +101,16 @@ export function AboutPage() {
           >
             <BarChart3 className="h-5 w-5" />
             View Analytics
+          </Button>
+
+          <Button
+            variant="destructive"
+            size="lg"
+            onClick={() => navigate("/mock-test")}
+            className="flex items-center gap-2 px-8 py-3"
+          >
+            <BarChart3 className="h-5 w-5" />
+            Take Mock Test
           </Button>
         </div>
 
