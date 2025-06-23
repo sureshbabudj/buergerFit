@@ -79,10 +79,10 @@ export function QuizPage() {
 
   return (
     <main className="flex flex-col lg:flex-row">
-      <section className="hidden h-screen w-5/12 flex-col items-center justify-center bg-[#d6ebe9] p-9 lg:flex dark:bg-zinc-900">
+      <section className="hidden h-dvh w-1/2 flex-col items-center justify-center bg-[#d6ebe9] p-9 lg:flex dark:bg-zinc-900">
         {activeQuestion && <Question question={activeQuestion} />}
       </section>
-      <section className="bale flex h-screen w-full flex-col justify-between p-9 lg:h-auto">
+      <section className="flex h-dvh w-full lg:w-1/2 flex-col justify-between p-9 lg:h-auto">
         <Header reset={reset} />
 
         <div>

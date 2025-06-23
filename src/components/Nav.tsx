@@ -50,6 +50,7 @@ export function Nav({ reset }: { reset: () => void }) {
     } else {
       setQuestionIndex(getQuestionIndex(activeQuestion.id, questions));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeQuestion, questions.length]);
 
   if (questionIndex === null) {

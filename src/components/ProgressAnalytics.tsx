@@ -151,13 +151,13 @@ export function MockTestAnalytics() {
                 className="border-b border-gray-200 dark:border-gray-700"
               >
                 <td className="text-left w-6/12 py-2">
-                  {format(new Date(test.date), "do MMM, yyyy k:m")}
+                  {format(new Date(test.date), "do MMM, yyyy k:mm")}
                 </td>
                 <td className="text-left w-4/12 py-2">{test.region}</td>
                 <td
                   className={cn("text-right w-2/12 py-2", {
                     // minimun 17 questions out of 33 questions
-                    "text-green-500": test.score > 50,
+                    "text-green-500": test.score >= 50,
                     "text-red-500": test.score < 50,
                   })}
                 >
@@ -584,7 +584,7 @@ export function ProgressAnalytics() {
   );
 }
 
-function calculateRecentActivity(attemptedQuestions: any) {
+function calculateRecentActivity(attemptedQuestions: AttemptedQuestion[]) {
   const now = new Date();
   const last7Days = Array.from({ length: 7 }, (_, i) => {
     const date = new Date(now);
@@ -596,7 +596,7 @@ function calculateRecentActivity(attemptedQuestions: any) {
     [key: string]: { questions: number; correct: number; total: number };
   } = {};
 
-  Object.values(attemptedQuestions).forEach((data: any) => {
+  Object.values(attemptedQuestions).forEach((data: AttemptedQuestion) => {
     const date = data.lastAttemptedAt.split("T")[0];
     if (last7Days.includes(date)) {
       if (!activityByDate[date]) {

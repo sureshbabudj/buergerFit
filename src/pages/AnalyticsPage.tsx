@@ -8,11 +8,11 @@ export function AnalyticsPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background p-4 container mx-auto">
+    <div className="min-h-dvh max-w-4xl mx-auto  bg-background p-4 container">
       <div className="mb-8">
         <Header reset={() => {}} />
       </div>
-      <div className="max-w-4xl mx-auto">
+      <div className="">
         <div className="flex items-center gap-4 mb-6">
           <Button
             variant="outline"

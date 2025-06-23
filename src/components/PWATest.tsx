@@ -4,6 +4,7 @@ export function PWATest() {
   const [pwaStatus, setPwaStatus] = useState<{
     isInstalled: boolean;
     canInstall: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     deferredPrompt: any;
     requirements: {
       https: boolean;
