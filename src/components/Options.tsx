@@ -4,6 +4,7 @@ import type { OptionType, QuestionType } from "../types";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useMemo } from "react";
 
 export function Options({
   question,
@@ -17,7 +18,11 @@ export function Options({
   selectedOption: OptionType | null;
 }) {
   const { language } = useQuizStore();
-  const { options, answer } = question;
+  const { options: actualOptions, answer } = question;
+
+  const options = useMemo(() => {
+    return actualOptions.sort(() => Math.random() - 0.5);
+  }, [actualOptions]);
 
   return (
     <div className="my-4">
