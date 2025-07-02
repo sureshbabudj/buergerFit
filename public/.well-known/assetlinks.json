@@ -1,0 +1,11 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.web.buergerfit.twa",
+      "sha256_cert_fingerprints":
+        ["37:B6:99:4A:45:3D:5E:9C:41:49:DF:E4:A4:9C:6A:D0:39:AA:C1:5C:02:4E:9B:46:0E:F8:BD:03:6D:14:3D:E0"]
+    }
+  }
+]
