@@ -3,7 +3,7 @@ import { Tabs } from "./Tabs";
 import { MobileDrawer } from "./MobileDrawer";
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "./ui/button";
-import { FileQuestionIcon, InfoIcon, Target } from "lucide-react";
+import { FileQuestionIcon, HomeIcon, InfoIcon, Target } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { Logo } from "./Logo";
 
@@ -13,6 +13,7 @@ export function Header({ reset }: { reset: () => void }) {
   const isQuizPage = location.pathname === "/";
   const isAboutPage = location.pathname === "/about";
   const isMockTestPage = location.pathname === "/mock-test";
+  const isPrivacyPage = location.pathname === "/privacy";
 
   return (
     <header className="flex w-full items-center justify-between mb-2">
@@ -33,7 +34,16 @@ export function Header({ reset }: { reset: () => void }) {
           </div>
         )}
 
-        {!isAboutPage && !isMockTestPage && (
+        {isPrivacyPage && (
+          <Button asChild variant="outline">
+            <Link to="/" className="flex lg:gap-1 !px-3">
+              <HomeIcon className="w-4 h-4" />
+              <span className="text-sm font-bold xl:block hidden">Home</span>
+            </Link>
+          </Button>
+        )}
+
+        {!isAboutPage && !isMockTestPage  && (
           <Button asChild variant="outline">
             <Link to="/about" className="flex lg:gap-1 !px-3">
               <InfoIcon className="w-4 h-4" />
@@ -42,7 +52,7 @@ export function Header({ reset }: { reset: () => void }) {
           </Button>
         )}
 
-        {!isMockTestPage && (
+        {!isMockTestPage && !isPrivacyPage && (
           <Button variant="outline" asChild>
             <Link to="/mock-test" className="flex lg:gap-1 !px-3">
               <Target className="h-4 w-4" />

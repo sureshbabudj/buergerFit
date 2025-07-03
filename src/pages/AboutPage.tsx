@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { useNavigate } from "react-router-dom";
-import { BookOpen, BarChart3, Play, Users, Target } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { BookOpen, BarChart3, Play, Users, Target, Github } from "lucide-react";
 import { Header } from "@/components/Header";
 
 export function AboutPage() {
@@ -115,7 +115,6 @@ export function AboutPage() {
         </div>
 
         {/* Stats */}
-
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="hover:shadow-lg transition-shadow">
             <CardContent className="p-6">
@@ -149,6 +148,39 @@ export function AboutPage() {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* foot links */}
+        <div className="mt-16 text-gray-500 dark:text-gray-400 flex flex-col md:flex-row justify-between gap-2">
+          <p className="text-sm">
+            This app is open source. You can view the code on{" "}
+            <a
+              href="https://github.com/sureshbabudj/buergerFit"
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              <Github className="w-4 h-4 inline-block" />
+              GitHub Repo
+            </a>
+          </p>
+          <p>
+            <Link to="/privacy" className="text-blue-600 hover:underline">Privacy Policy &amp; Disclaimer</Link>{" "}
+          </p>
+        </div>
+
+        {/* footer */}
+        <div className=" text-gray-500 dark:text-gray-400 flex flex-col md:flex-row justify-between gap-2">
+          <p>© {new Date().getFullYear()} BürgerFit.</p>
+          <p className="text-sm">
+            Developed with ❤️ by{" "}
+            <a
+              href="https://sureshbabudj.blogspot.com/"
+              target="_blank"
+              className="text-blue-600 hover:underline"
+            >
+              Suresh Babu DJ
+            </a>
+          </p>
         </div>
       </div>
     </div>
