@@ -36,10 +36,11 @@ const PrivacyPolicyPage = () => {
             </p>
             <p className="text-base lg:text-md">
               The content for the quizzes in this app is directly derived from
-              the official 'gesamtfragenkatalog-lebenindeutschland' (complete
-              catalog of questions for the 'Life in Germany' test) provided by
-              the Federal Office for Migration and Refugees (BAMF). You can find
-              the original source document publicly available at the official
+              the official &apos;gesamtfragenkatalog-lebenindeutschland&apos;
+              (complete catalog of questions for the &apos;Life in Germany&apos;
+              test) provided by the Federal Office for Migration and Refugees
+              (BAMF). You can find the original source document publicly
+              available at the official
               <a
                 href="https://www.bamf.de/SharedDocs/Anlagen/DE/Integration/Einbuergerung/gesamtfragenkatalog-lebenindeutschland.html"
                 target="_blank"

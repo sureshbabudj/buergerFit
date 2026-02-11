@@ -69,6 +69,7 @@ export default function MockTestPage() {
     if (!chosenRegion) return [];
 
     // Get 30 random questions from Teil 1 (300 questions)
+    // eslint-disable-next-line react-hooks/purity
     const shuffledTeil1 = [...questionsTeil1].sort(() => Math.random() - 0.5);
     const selectedTeil1 = shuffledTeil1.slice(0, GENERAL_QUESTIONS);
 
@@ -80,15 +81,19 @@ export default function MockTestPage() {
     );
 
     const shuffledTeil2 = [...filteredQuestions].sort(
+      // eslint-disable-next-line react-hooks/purity
       () => Math.random() - 0.5,
     );
     const regionalQuestions = shuffledTeil2.slice(0, REGIONAL_QUESTIONS);
 
     // Combine and shuffle all questions
     const allQuestions = [...selectedTeil1, ...regionalQuestions];
-    return allQuestions
-      .sort(() => Math.random() - 0.5)
-      .map((q, i) => ({ ...q, id: String(i) }));
+    return (
+      allQuestions
+        // eslint-disable-next-line react-hooks/purity
+        .sort(() => Math.random() - 0.5)
+        .map((q, i) => ({ ...q, id: String(i) }))
+    );
   }, [chosenRegion]);
 
   const currentQuestion = mockTestQuestions[testState.currentQuestionIndex];

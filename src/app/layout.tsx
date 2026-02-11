@@ -74,11 +74,7 @@ export default function RootLayout({
         <link rel="canonical" href="https://buergerfit.kanini.top" />
       </head>
 
-      <body>
-        <div className="bg-white text-zinc-700 dark:bg-black dark:text-zinc-400"></div>
-
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

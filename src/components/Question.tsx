@@ -1,5 +1,6 @@
 import { useQuizStore } from "@/lib/store";
 import type { QuestionType } from "@/types";
+import Image from "next/image";
 
 export function Question({ question }: { question: QuestionType }) {
   const { language } = useQuizStore();
@@ -18,10 +19,12 @@ export function Question({ question }: { question: QuestionType }) {
       </p>
       {q.image && (
         <div className="flex justify-center">
-          <img
-            src={`images/${q.image}`}
+          <Image
+            src={`/images/${q.image}`}
             alt={q[language]}
-            className="lg:max-h-72 p-3 rounded-md object-contain bg-zinc-100 dark:bg-zinc-800"
+            width={500}
+            height={300}
+            className="lg:max-h-72 w-auto h-auto p-3 rounded-md object-contain bg-zinc-100 dark:bg-zinc-800"
           />
         </div>
       )}

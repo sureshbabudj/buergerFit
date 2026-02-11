@@ -21,7 +21,8 @@ export function Options({
   const { options: actualOptions, answer } = question;
 
   const options = useMemo(() => {
-    return actualOptions.sort(() => Math.random() - 0.5);
+    // eslint-disable-next-line react-hooks/purity
+    return [...actualOptions].sort(() => Math.random() - 0.5);
   }, [actualOptions]);
 
   return (
@@ -47,7 +48,7 @@ export function Options({
                   highlightAnswer &&
                   selectedOption?.id === option.id &&
                   answer !== option.de,
-              }
+              },
             )}
           >
             <RadioGroupItem

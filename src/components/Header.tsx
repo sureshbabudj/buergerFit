@@ -16,7 +16,7 @@ export function Header({ reset }: { reset: () => void }) {
   const isPrivacyPage = pathname === "/privacy";
   return (
     <header className="flex w-full items-center justify-between mb-2">
-      <a
+      <Link
         className="flex items-center text-2xl font-bold dark:text-white"
         href="/"
       >
@@ -25,7 +25,7 @@ export function Header({ reset }: { reset: () => void }) {
         <span className="name group ml-2 rounded-3xl bg-[#fafafa] px-3 text-sm font-bold text-black hidden lg:inline-block">
           <span className="">v0.1</span>
         </span>
-      </a>
+      </Link>
       <div className="flex items-center gap-2">
         {isQuizPage && (
           <div className="hidden lg:block">
@@ -42,7 +42,7 @@ export function Header({ reset }: { reset: () => void }) {
           </Button>
         )}
 
-        {!isAboutPage && !isMockTestPage  && (
+        {!isAboutPage && !isMockTestPage && (
           <Button asChild variant="outline">
             <Link href="/about" className="flex lg:gap-1 !px-3">
               <InfoIcon className="w-4 h-4" />
