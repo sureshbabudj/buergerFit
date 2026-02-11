@@ -1,11 +1,11 @@
-import { useQuizStore } from "../lib/store";
+import { useQuizStore } from "@/lib/store";
 import { formatDistanceToNow } from "date-fns";
 import { Badge } from "./ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "./ui/button";
 import { BarChart3 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 export function Tools() {
   const {
@@ -15,7 +15,7 @@ export function Tools() {
     currentTeil,
     chosenRegion,
   } = useQuizStore();
-  const navigate = useNavigate();
+  const router =useRouter();
 
   const attemptedQuestionsTeil = Object.values(attemptedQuestions).filter(
     (i) =>
@@ -77,7 +77,7 @@ export function Tools() {
           variant="outline"
           size="sm"
           className="w-full"
-          onClick={() => navigate("/analytics")}
+          onClick={() => router.push("/analytics")}
         >
           <BarChart3 className="h-4 w-4 mr-2" />
           View Analytics

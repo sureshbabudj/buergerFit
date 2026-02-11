@@ -1,5 +1,7 @@
+"use client";
+
 import { useMemo, useState } from "react";
-import { useQuizStore } from "../lib/store";
+import { useQuizStore } from "@/lib/store";
 import { Header } from "@/components/Header";
 import { Question } from "@/components/Question";
 import { Options } from "@/components/Options";
@@ -24,7 +26,7 @@ import {
   ArrowRight,
   RotateCcw,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import type { OptionType } from "@/types";
 
 import questionsTeil1 from "@/assets/questions";
@@ -48,8 +50,8 @@ const GENERAL_QUESTIONS = 30;
 const REGIONAL_QUESTIONS = 3;
 const PASSING_SCORE = 50; // 17 out of 33 questions
 
-export function MockTestPage() {
-  const navigate = useNavigate();
+export default function MockTestPage() {
+  const router = useRouter();
   const { chosenRegion, setChosenRegion, setAttemptedMockTests } =
     useQuizStore();
 
@@ -74,11 +76,11 @@ export function MockTestPage() {
     const startIndex = regionIndex * 10;
     const filteredQuestions = [...questionsTeil2].slice(
       startIndex,
-      startIndex + 10
+      startIndex + 10,
     );
 
     const shuffledTeil2 = [...filteredQuestions].sort(
-      () => Math.random() - 0.5
+      () => Math.random() - 0.5,
     );
     const regionalQuestions = shuffledTeil2.slice(0, REGIONAL_QUESTIONS);
 
@@ -113,13 +115,13 @@ export function MockTestPage() {
     if (testState.isCompleted) return;
 
     const optionIndex = currentQuestion.options.findIndex(
-      (opt) => opt.id === option.id
+      (opt) => opt.id === option.id,
     );
 
     setTestState((prev) => ({
       ...prev,
       answers: prev.answers.map((answer, index) =>
-        index === prev.currentQuestionIndex ? optionIndex : answer
+        index === prev.currentQuestionIndex ? optionIndex : answer,
       ),
     }));
   };
@@ -173,7 +175,7 @@ export function MockTestPage() {
     const correctAnswers = testState.answers.filter((answer, index) => {
       const question = mockTestQuestions[index];
       const correctOptionIndex = question.options.findIndex(
-        (opt) => opt.de === question.answer
+        (opt) => opt.de === question.answer,
       );
       return answer === correctOptionIndex;
     }).length;
@@ -184,7 +186,7 @@ export function MockTestPage() {
         ? Math.round(
             (testState.endTime.getTime() - testState.startTime.getTime()) /
               1000 /
-              60
+              60,
           )
         : 0;
 
@@ -231,7 +233,7 @@ export function MockTestPage() {
               <SelectRegion reset={() => {}} />
 
               <Button
-                onClick={() => navigate("/")}
+                onClick={() => router.push("/")}
                 variant="outline"
                 className="w-full"
               >
@@ -352,7 +354,7 @@ export function MockTestPage() {
                   Retake Test
                 </Button>
                 <Button
-                  onClick={() => navigate("/")}
+                  onClick={() => router.push("/")}
                   variant="outline"
                   className="flex-1"
                 >

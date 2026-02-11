@@ -1,5 +1,5 @@
-import { useQuizStore } from "../lib/store";
-import type { QuestionType } from "../types";
+import { useQuizStore } from "@/lib/store";
+import type { QuestionType } from "@/types";
 
 export function Question({ question }: { question: QuestionType }) {
   const { language } = useQuizStore();

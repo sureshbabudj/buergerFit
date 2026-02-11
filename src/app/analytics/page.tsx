@@ -1,11 +1,13 @@
-import { Header } from "@/components/Header";
-import { ProgressAnalytics } from "../components/ProgressAnalytics";
-import { Button } from "../components/ui/button";
-import { ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+"use client";
 
-export function AnalyticsPage() {
-  const navigate = useNavigate();
+import { Header } from "@/components/Header";
+import { ProgressAnalytics } from "@/components/ProgressAnalytics";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+export default function AnalyticsPage() {
+  const router = useRouter();
 
   return (
     <div className="min-h-dvh max-w-4xl mx-auto  bg-background p-4 container">
@@ -17,7 +19,7 @@ export function AnalyticsPage() {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => navigate("/")}
+            onClick={() => router.push("/")}
             className="flex items-center gap-2"
           >
             <ArrowLeft className="h-4 w-4" />

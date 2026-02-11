@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { useQuizStore } from "../lib/store";
-import type { OptionType, QuestionType } from "../types";
+import { useQuizStore } from "@/lib/store";
+import type { OptionType, QuestionType } from "@/types";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";

@@ -1,14 +1,16 @@
+"use client";
+
 import { useState } from "react";
-import { Options } from "../components/Options";
-import { Question } from "../components/Question";
-import { useQuizStore } from "../lib/store";
-import type { AttemptedQuestion, OptionType } from "../types";
-import { Tools } from "../components/Tools";
-import { Nav } from "../components/Nav";
+import { Options } from "@/components/Options";
+import { Question } from "@/components/Question";
+import { useQuizStore } from "@/lib/store";
+import type { AttemptedQuestion, OptionType } from "@/types";
+import { Tools } from "@/components/Tools";
+import { Nav } from "@/components/Nav";
 import { toast } from "sonner";
 import { Header } from "@/components/Header";
 
-export function QuizPage() {
+export default function QuizPage() {
   const {
     setAttemptedQuestions,
     attemptedQuestions,
@@ -38,7 +40,7 @@ export function QuizPage() {
       const lastAttemptedAt = new Date().toISOString();
       let attemptedQuestion: AttemptedQuestion;
       const selectedOptionIndex = activeQuestion.options.findIndex(
-        (option) => option.de === selectedOption.de
+        (option) => option.de === selectedOption.de,
       );
 
       if (attemptedQuestions[activeQuestion.id]) {

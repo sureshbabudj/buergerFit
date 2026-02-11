@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useQuizStore } from "../lib/store";
+import { useQuizStore } from "@/lib/store";
 import questionsTeil1 from "../assets/questions";
 import {
   questionWithIds as questionsTeil2,
@@ -91,7 +91,7 @@ export function Tabs({
   ];
 
   const handleActiveRegion = (
-    region = chosenRegion || regions[0]
+    region = chosenRegion || regions[0],
   ): {
     filteredQuestions: QuestionType[];
     activeQuestion: QuestionType;
@@ -100,7 +100,7 @@ export function Tabs({
     const startIndex = regionIndex * 10;
     const filteredQuestions = [...questionsTeil2].slice(
       startIndex,
-      startIndex + 10
+      startIndex + 10,
     );
     return {
       filteredQuestions,
@@ -135,7 +135,6 @@ export function Tabs({
 
   useEffect(() => {
     handleTeilSelection(currentTeil);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTeil]);
 
   return (
@@ -170,7 +169,7 @@ export function Tabs({
                     onClick={() => handleRegionSelection(region)}
                     className={cn(
                       "cursor-pointer",
-                      chosenRegion === region ? "bg-blue-500 text-white" : ""
+                      chosenRegion === region ? "bg-blue-500 text-white" : "",
                     )}
                   >
                     {region}

@@ -7,7 +7,8 @@ import type {
   QuestionType,
   TeilType,
   AttemptedMockTest,
-} from "../types";
+} from "@/types";
+import questionsTeil1 from "@/assets/questions";
 
 const QUIZ_STORE_NAME = "quiz-store";
 
@@ -50,7 +51,7 @@ export const useQuizStore = create<QuizStore>()(
         setCurrentTeil: (teil) => set({ currentTeil: teil }),
         chosenRegion: "",
         setChosenRegion: (region) => set({ chosenRegion: region }),
-        questions: [],
+        questions: questionsTeil1,
         setQuestions: (questions) => set({ questions }),
         language: "de",
         setLanguage: (language) => set({ language }),
@@ -114,7 +115,7 @@ export const useQuizStore = create<QuizStore>()(
           activeQuestionTeil2: state.activeQuestionTeil2,
           attemptedMockTests: state.attemptedMockTests,
         }),
-      }
-    )
-  )
+      },
+    ),
+  ),
 );

@@ -1,17 +1,20 @@
-import { Button } from "../components/ui/button";
+"use client";
+
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
-import { Link, useNavigate } from "react-router-dom";
+} from "@/components/ui/card";
+import Link from "next/link";
 import { BookOpen, BarChart3, Play, Users, Target, Github } from "lucide-react";
 import { Header } from "@/components/Header";
+import { useRouter } from "next/navigation";
 
-export function AboutPage() {
-  const navigate = useNavigate();
+export default function AboutPage() {
+  const router = useRouter();
 
   return (
     <div className="min-h-dvh bg-gradient-to-br from-[#d6ebe9] to-green-100 dark:from-gray-900 dark:to-gray-800">
@@ -86,7 +89,7 @@ export function AboutPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
             size="lg"
-            onClick={() => navigate("/quiz")}
+            onClick={() => router.push("/quiz")}
             className="flex items-center gap-2 px-8 py-3"
           >
             <Play className="h-5 w-5" />
@@ -96,7 +99,7 @@ export function AboutPage() {
           <Button
             variant="outline"
             size="lg"
-            onClick={() => navigate("/analytics")}
+            onClick={() => router.push("/analytics")}
             className="flex items-center gap-2 px-8 py-3"
           >
             <BarChart3 className="h-5 w-5" />
@@ -106,7 +109,7 @@ export function AboutPage() {
           <Button
             variant="destructive"
             size="lg"
-            onClick={() => navigate("/mock-test")}
+            onClick={() => router.push("/mock-test")}
             className="flex items-center gap-2 px-8 py-3"
           >
             <BarChart3 className="h-5 w-5" />
@@ -164,7 +167,9 @@ export function AboutPage() {
             </a>
           </p>
           <p>
-            <Link to="/privacy" className="text-blue-600 hover:underline">Privacy Policy &amp; Disclaimer</Link>{" "}
+            <Link href="/privacy" className="text-blue-600 hover:underline">
+              Privacy Policy &amp; Disclaimer
+            </Link>{" "}
           </p>
         </div>
 

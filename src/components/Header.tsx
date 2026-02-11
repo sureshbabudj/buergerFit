@@ -4,17 +4,16 @@ import { MobileDrawer } from "./MobileDrawer";
 import { ModeToggle } from "./ModeToggle";
 import { Button } from "./ui/button";
 import { FileQuestionIcon, HomeIcon, InfoIcon, Target } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { Logo } from "./Logo";
 
 export function Header({ reset }: { reset: () => void }) {
-  const location = useLocation();
-
-  const isQuizPage = location.pathname === "/";
-  const isAboutPage = location.pathname === "/about";
-  const isMockTestPage = location.pathname === "/mock-test";
-  const isPrivacyPage = location.pathname === "/privacy";
-
+  const pathname = usePathname();
+  const isQuizPage = pathname === "/";
+  const isAboutPage = pathname === "/about";
+  const isMockTestPage = pathname === "/mock-test";
+  const isPrivacyPage = pathname === "/privacy";
   return (
     <header className="flex w-full items-center justify-between mb-2">
       <a
@@ -36,7 +35,7 @@ export function Header({ reset }: { reset: () => void }) {
 
         {isPrivacyPage && (
           <Button asChild variant="outline">
-            <Link to="/" className="flex lg:gap-1 !px-3">
+            <Link href="/" className="flex lg:gap-1 !px-3">
               <HomeIcon className="w-4 h-4" />
               <span className="text-sm font-bold xl:block hidden">Home</span>
             </Link>
@@ -45,7 +44,7 @@ export function Header({ reset }: { reset: () => void }) {
 
         {!isAboutPage && !isMockTestPage  && (
           <Button asChild variant="outline">
-            <Link to="/about" className="flex lg:gap-1 !px-3">
+            <Link href="/about" className="flex lg:gap-1 !px-3">
               <InfoIcon className="w-4 h-4" />
               <span className="text-sm font-bold xl:block hidden">About</span>
             </Link>
@@ -54,7 +53,7 @@ export function Header({ reset }: { reset: () => void }) {
 
         {!isMockTestPage && !isPrivacyPage && (
           <Button variant="outline" asChild>
-            <Link to="/mock-test" className="flex lg:gap-1 !px-3">
+            <Link href="/mock-test" className="flex lg:gap-1 !px-3">
               <Target className="h-4 w-4" />
               <span className="text-sm font-bold xl:block hidden">
                 Take Mock Test
@@ -65,7 +64,7 @@ export function Header({ reset }: { reset: () => void }) {
 
         {isAboutPage && (
           <Button asChild variant="outline">
-            <Link to="/" className="flex lg:gap-1 !px-3">
+            <Link href="/" className="flex lg:gap-1 !px-3">
               <FileQuestionIcon className="w-4 h-4" />
               <span className="text-sm font-bold lg:block hidden">
                 Back to Quiz

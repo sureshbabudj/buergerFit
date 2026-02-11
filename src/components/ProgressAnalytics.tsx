@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useQuizStore } from "../lib/store";
+import { useQuizStore } from "@/lib/store";
 import { Progress } from "./ui/progress";
 import {
   Card,
