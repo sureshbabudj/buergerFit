@@ -2,12 +2,11 @@ import { Metadata, Viewport } from "next";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { BarChart3, BookOpen, Github, Home, PlayCircle } from "lucide-react";
 
 import "./globals.css";
-import Link from "next/link";
-import { generateSlug, getQuestionById } from "@/lib/utils";
+
 import { Footer } from "@/components/footer";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://buergerfit.web.app"),
@@ -77,6 +76,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script
+          defer
+          src="https://analytics.genaul.com/script.js"
+          data-website-id="0caeebe1-d62e-4d0b-8385-fb36188f37cc"
+        ></Script>
+      </head>
       <body>
         <ThemeProvider
           attribute="class"
