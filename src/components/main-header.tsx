@@ -2,19 +2,24 @@
 
 import { Sun, Moon } from "lucide-react";
 import { Logo } from "./Logo";
-import { useQuizStore } from "@/lib/store";
-import React from "react";
+import { useTheme } from "@/components/theme-provider";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 export function MainHeader({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
-  const { theme, setTheme } = useQuizStore();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
@@ -48,8 +53,17 @@ export function MainHeader({
           <button
             onClick={toggleTheme}
             className="rounded-md p-2 hover:bg-secondary border border-border"
+            aria-label="Toggle theme"
           >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+            {mounted ? (
+              theme === "dark" ? (
+                <Sun size={18} />
+              ) : (
+                <Moon size={18} />
+              )
+            ) : (
+              <div className="h-[18px] w-[18px]" />
+            )}
           </button>
           <Link
             href="/mock-test"

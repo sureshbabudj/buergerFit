@@ -1,17 +1,14 @@
 "use client";
 
-import { Header } from "@/components/Header";
+import { MainHeader } from "@/components/main-header";
 import { Github } from "lucide-react";
 
 const PrivacyPolicyPage = () => {
   return (
-    <div className="min-h-dvh bg-gradient-to-br from-[#d6ebe9] to-green-100 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-12">
-          <Header reset={() => {}} />
-        </div>
-
+    <>
+      {/* Header */}
+      <MainHeader />
+      <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="max-w-2xl text-center mb-12 mx-auto">
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -116,7 +113,7 @@ const PrivacyPolicyPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

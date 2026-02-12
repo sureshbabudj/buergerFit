@@ -2,20 +2,12 @@
 
 import { useState } from "react";
 import {
-  BookOpen,
   BarChart3,
   Globe,
-  Github,
   ChevronDown,
-  Home,
-  PlayCircle,
   ShieldCheck,
-  HelpCircle,
   ArrowRight,
-  Sun,
-  Moon,
 } from "lucide-react";
-import { Logo } from "@/components/Logo";
 import Link from "next/link";
 import { generateSlug, getQuestionById } from "@/lib/utils";
 import { MainHeader } from "@/components/main-header";

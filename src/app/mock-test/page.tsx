@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useQuizStore } from "@/lib/store";
-import { Header } from "@/components/Header";
+import { MainHeader } from "@/components/main-header";
 import { Question } from "@/components/Question";
 import { Options } from "@/components/Options";
 import { Button } from "@/components/ui/button";
@@ -36,7 +36,6 @@ import {
 } from "@/assets/questions_teil_2";
 import { SelectRegion } from "@/components/Tabs";
 import { Separator } from "@/components/ui/separator";
-import { MainHeader } from "@/components/main-header";
 
 interface MockTestState {
   currentQuestionIndex: number;
@@ -375,7 +374,7 @@ export default function MockTestPage() {
 
       {/* Test Interface */}
       <section className="flex min-h-dvh pb-20 md:pb-0 w-full flex-col justify-between p-9 lg:h-auto">
-        <Header reset={() => {}} />
+        <MainHeader />
 
         {/* Question */}
         <div>

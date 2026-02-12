@@ -1,15 +1,10 @@
 "use client";
 
-import { Header } from "@/components/Header";
 import { MainHeader } from "@/components/main-header";
 import { ProgressAnalytics } from "@/components/ProgressAnalytics";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function AnalyticsPage() {
-  const router = useRouter();
-
   return (
     <>
       <MainHeader />

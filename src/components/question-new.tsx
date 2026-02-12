@@ -1,15 +1,49 @@
 "use client";
 
+import { useQuizStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
-import { OptionType, QuestionType } from "@/types";
+import { AttemptedQuestion, OptionType, QuestionType } from "@/types";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Question({ question }: { question: QuestionType }) {
+  const {
+    attemptedQuestions,
+    setAttemptedQuestions,
+    currentTeil,
+    chosenRegion,
+  } = useQuizStore();
   const [attempted, setAttempted] = useState<OptionType | null>(null);
 
   const attemptAnswer = (option: OptionType) => {
     if (attempted) return; // Prevent multiple attempts
+
+    const optionIndex = question.options.findIndex((o) => o.id === option.id);
+    // 1. Determine correctness
+    // Assuming question.answer is the index or matches the logic of optionIndex
+    const isCorrect = question.options[optionIndex].de === question.answer;
+
+    // 2. Get existing attempt or create fresh one
+    const existing = attemptedQuestions[question.id] || {
+      questionIndex: question.id,
+      selectedOption: optionIndex,
+      results: [],
+      timeTaken: 0,
+      lastAttemptedAt: new Date().toISOString(),
+      teil: currentTeil,
+      region: chosenRegion,
+    };
+
+    // 3. Update the attempt with the new result
+    const updatedAttempt: AttemptedQuestion = {
+      ...existing,
+      selectedOption: optionIndex,
+      results: [...existing.results, isCorrect], // Append the latest attempt
+      lastAttemptedAt: new Date().toISOString(),
+      region: chosenRegion, // Ensure region stays updated
+    };
+
+    setAttemptedQuestions(updatedAttempt);
     setAttempted(option);
   };
 

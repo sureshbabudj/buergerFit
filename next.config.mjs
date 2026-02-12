@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    dirs: ["src"],
-  },
   output: "export", // This turns off the need for a Node.js server
   trailingSlash: true, // Better for SEO on static hosts
   images: {
