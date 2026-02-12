@@ -209,7 +209,7 @@ export default function MockTestPage() {
   // Show region selection if no region is chosen
   if (!chosenRegion) {
     return (
-      <div className="h-full flex flex-col py-4">
+      <div className="h-full flex flex-col">
         <MainHeader className="mb-10" />
         <div className="container mx-auto max-w-4xl">
           <Card className="max-w-md mx-auto">
@@ -252,7 +252,7 @@ export default function MockTestPage() {
   // Show test setup if not started
   if (!testState.startTime) {
     return (
-      <div className="h-full flex flex-col py-4">
+      <div className="h-full flex flex-col">
         <MainHeader className="mb-10" />
         <div className="container mx-auto max-w-4xl">
           <Card className="max-w-md mx-auto">
@@ -297,7 +297,7 @@ export default function MockTestPage() {
   // Show results
   if (testState.showResults) {
     return (
-      <div className="h-full flex flex-col py-4">
+      <div className="h-full flex flex-col">
         <MainHeader className="mb-10" />
         <div className="container mx-auto max-w-4xl">
           <Card>
