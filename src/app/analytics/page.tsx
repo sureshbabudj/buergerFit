@@ -1,20 +1,12 @@
-"use client";
+import { Metadata } from "next";
+import { AnalyticsContent } from "./analytics-content";
 
-import { MainHeader } from "@/components/main-header";
-import { ProgressAnalytics } from "@/components/ProgressAnalytics";
-import { useRouter } from "next/navigation";
+export const metadata: Metadata = {
+  title: "My Progress | BürgerFit Analytics",
+  description:
+    "Track your learning progress, success rate, and identify areas that need more practice for the German citizenship test.",
+};
 
-export default function AnalyticsPage() {
-  return (
-    <>
-      <MainHeader />
-
-      <div className="p-6 max-w-5xl mx-auto">
-        <div className="flex items-center gap-4 mb-6">
-          <h1 className="text-2xl font-bold">Progress Analytics</h1>
-        </div>
-        <ProgressAnalytics />
-      </div>
-    </>
-  );
+export default function Page() {
+  return <AnalyticsContent />;
 }

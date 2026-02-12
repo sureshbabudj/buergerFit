@@ -7,14 +7,20 @@ import {
 import { encodeRegion, generateSlug } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://buergerfit.web.app";
+  const baseUrl = "https://buergerfit.kanini.top";
 
   // 1. Static Pages
-  const staticPages = ["", "/learn"].map((route) => ({
+  const staticPages = [
+    "",
+    "/analytics",
+    "/mock-test",
+    "/privacy",
+    "/select-region",
+  ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: 1,
+    priority: route === "" ? 1 : 0.8,
   }));
 
   // 2. Common Questions: /learn/{slug}

@@ -105,8 +105,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!context) return { title: "Not Found" };
 
   return {
-    title: `Question ${context.currentIndex + 1}: ${context.question.question.de.substring(0, 50)}...`,
-    description: context.question.question.de,
+    title: `Question ${context.currentIndex + 1} | BürgerFit German Citizenship Test`,
+    description: `Official Prep: ${context.question.question.de} — Study the German naturalization test with our interactive bilingual quiz.`,
+    openGraph: {
+      title: `Practice Question ${context.currentIndex + 1} | BürgerFit`,
+      description: context.question.question.de,
+      images: ["/assets/og-image.png"],
+    },
   };
 }
 
@@ -118,8 +123,36 @@ export default async function QuestionPage({ params }: Props) {
 
   const { question, currentIndex, total, prev, next, basePath } = context;
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://buergerfit.kanini.top",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Learn",
+        item: "https://buergerfit.kanini.top/learn/0-in-deutschland-duerfen-menschen-offen",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: `Question ${currentIndex + 1}`,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <MainHeader className="hidden md:block" />
       <div className="flex flex-col h-[calc(100dvh-5rem)] md:h-auto">
         {/* App-Style Header */}
