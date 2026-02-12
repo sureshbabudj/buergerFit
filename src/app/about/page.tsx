@@ -12,6 +12,7 @@ import Link from "next/link";
 import { BookOpen, BarChart3, Play, Users, Target, Github } from "lucide-react";
 import { Header } from "@/components/Header";
 import { useRouter } from "next/navigation";
+import { generateSlug, getQuestionById } from "@/lib/utils";
 
 export default function AboutPage() {
   const router = useRouter();
@@ -89,11 +90,16 @@ export default function AboutPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
             size="lg"
-            onClick={() => router.push("/quiz")}
             className="flex items-center gap-2 px-8 py-3"
+            asChild
           >
-            <Play className="h-5 w-5" />
-            Start Quiz
+            <Link
+              href={`/learn/${generateSlug("0", getQuestionById("0").question.de)}`}
+              className="flex items-center gap-2"
+            >
+              <Play className="h-5 w-5" />
+              Learn now
+            </Link>
           </Button>
 
           <Button
@@ -109,11 +115,13 @@ export default function AboutPage() {
           <Button
             variant="destructive"
             size="lg"
-            onClick={() => router.push("/mock-test")}
             className="flex items-center gap-2 px-8 py-3"
+            asChild
           >
-            <BarChart3 className="h-5 w-5" />
-            Take Mock Test
+            <Link href="/mock-test" className="flex items-center gap-2">
+              <Target className="h-5 w-5" />
+              Take Mock Test
+            </Link>
           </Button>
         </div>
 

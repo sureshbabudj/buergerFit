@@ -31,6 +31,8 @@ export interface QuizStore {
   setShowAnalytics: (v: boolean) => void;
   attemptedMockTests: AttemptedMockTest[];
   setAttemptedMockTests: (attemptedMockTest: AttemptedMockTest) => void;
+  theme: "light" | "dark";
+  setTheme: (theme: "light" | "dark") => void;
 }
 
 export const useQuizStore = create<QuizStore>()(
@@ -104,6 +106,11 @@ export const useQuizStore = create<QuizStore>()(
               attemptedMockTest,
             ],
           })),
+        theme: "light",
+        setTheme: (theme) => {
+          document.documentElement.classList.toggle("dark", theme === "dark");
+          set({ theme });
+        },
       }),
       {
         name: QUIZ_STORE_NAME,

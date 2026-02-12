@@ -1,5 +1,19 @@
 import { Metadata } from "next";
+
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import {
+  BarChart3,
+  BookOpen,
+  Github,
+  HelpCircle,
+  Home,
+  PlayCircle,
+} from "lucide-react";
+
 import "./globals.css";
+import Link from "next/link";
+import { generateSlug, getQuestionById } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Next.js Basic CSS Example",
@@ -74,7 +88,69 @@ export default function RootLayout({
         <link rel="canonical" href="https://buergerfit.kanini.top" />
       </head>
 
-      <body>{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="min-h-screen bg-background text-foreground transition-colors duration-300 pb-20 md:pb-0">
+            {children}
+
+            {/* Mobile App Navigation */}
+            <div className="fixed bottom-0 left-0 z-50 flex h-20 w-full items-center justify-around border-t border-border bg-background/90 px-6 backdrop-blur-xl md:hidden">
+              <Link
+                href="/"
+                className="flex flex-col items-center gap-1 text-primary"
+              >
+                <Home size={22} />
+                <span className="text-[10px] font-bold">Home</span>
+              </Link>
+
+              <Link
+                href={`/learn/${generateSlug("0", getQuestionById("0").question.de)}`}
+                className="flex flex-col items-center gap-1 text-muted-foreground"
+              >
+                <BookOpen size={22} />
+                <span className="text-[10px] font-bold">Learn</span>
+              </Link>
+
+              <Link
+                href="/mock-test"
+                className="flex flex-col items-center gap-1 text-muted-foreground"
+              >
+                <PlayCircle size={22} />
+                <span className="text-[10px] font-bold">Quiz</span>
+              </Link>
+
+              <Link
+                href="/analytics"
+                className="flex flex-col items-center gap-1 text-muted-foreground"
+              >
+                <BarChart3 size={22} />
+                <span className="text-[10px] font-bold">Stats</span>
+              </Link>
+            </div>
+
+            <footer className="hidden md:block border-t border-border py-12 text-center text-muted-foreground">
+              <div className="flex flex-col items-center gap-4">
+                <a
+                  href="#"
+                  className="flex items-center gap-2 hover:text-foreground transition-colors"
+                >
+                  <Github size={20} /> <span>View on GitHub</span>
+                </a>
+                <p className="text-sm">
+                  © 2026 BürgerFit • Made for the Expat Community
+                </p>
+              </div>
+            </footer>
+          </div>
+
+          <Toaster richColors position="top-center" />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

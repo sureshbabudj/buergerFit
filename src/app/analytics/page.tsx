@@ -1,6 +1,7 @@
 "use client";
 
 import { Header } from "@/components/Header";
+import { MainHeader } from "@/components/main-header";
 import { ProgressAnalytics } from "@/components/ProgressAnalytics";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -10,25 +11,15 @@ export default function AnalyticsPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-dvh max-w-4xl mx-auto  bg-background p-4 container">
-      <div className="mb-8">
-        <Header reset={() => {}} />
-      </div>
-      <div className="">
+    <>
+      <MainHeader />
+
+      <div className="p-6 max-w-5xl mx-auto">
         <div className="flex items-center gap-4 mb-6">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => router.push("/")}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Quiz
-          </Button>
           <h1 className="text-2xl font-bold">Progress Analytics</h1>
         </div>
         <ProgressAnalytics />
       </div>
-    </div>
+    </>
   );
 }
