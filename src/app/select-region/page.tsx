@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { regions } from "@/assets/questions_teil_2";
-import RegionListContent from "./components/region-list-content";
+import RegionListContent from "@/components/region-list-content";
 import { MainHeader } from "@/components/main-header";
 
 // This page is now 100% static at build time

@@ -373,86 +373,89 @@ export default function MockTestPage() {
       </section>
 
       {/* Test Interface */}
-      <section className="flex min-h-dvh pb-20 md:pb-0 w-full flex-col justify-between p-9 lg:h-auto">
+      <section className="flex min-h-dvh w-full flex-col lg:h-auto">
         <MainHeader />
-
-        {/* Question */}
-        <div>
-          <div className="lg:hidden mb-6">
-            {currentQuestion && <Question question={currentQuestion} />}
-          </div>
-
-          {currentQuestion && (
-            <Options
-              question={currentQuestion}
-              setSelectedOption={submitAnswer}
-              highlightAnswer={false}
-              selectedOption={
-                testState.answers[testState.currentQuestionIndex] !== null
-                  ? currentQuestion.options[
-                      testState.answers[testState.currentQuestionIndex]!
-                    ]
-                  : null
-              }
-            />
-          )}
-        </div>
-
-        <div>
-          {/* Progress Bar */}
-          <div className="mb-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium">
-                Question {testState.currentQuestionIndex + 1} of{" "}
-                {totalQuestions}
-              </span>
-              <Badge variant="outline">{Math.round(progress)}% Complete</Badge>
-            </div>
-            <Progress value={progress} className="h-2" />
-          </div>
-
-          <Separator />
-
-          {/* Navigation */}
-          <div className="flex justify-between items-center my-2">
-            <Button
-              onClick={previousQuestion}
-              disabled={testState.currentQuestionIndex === 0}
-              variant="outline"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              <span className="text-sm font-medium hidden lg:inline">
-                Previous
-              </span>
-            </Button>
-
-            <div className="text-sm text-muted-foreground">
-              {testState.answers.filter((answer) => answer !== null).length} of{" "}
-              {totalQuestions} answered
+        <div className="p-9 flex-1 flex flex-col justify-between">
+          {/* Question */}
+          <div>
+            <div className="lg:hidden mb-6">
+              {currentQuestion && <Question question={currentQuestion} />}
             </div>
 
-            <Button
-              onClick={nextQuestion}
-              disabled={
-                testState.answers[testState.currentQuestionIndex] === null
-              }
-            >
-              {testState.currentQuestionIndex === totalQuestions - 1 ? (
-                <>
-                  <CheckCircle className="h-4 w-4 mr-2" />
-                  <span className="text-sm font-medium hidden lg:inline">
-                    Finish Test
-                  </span>
-                </>
-              ) : (
-                <>
-                  <span className="text-sm font-medium hidden lg:inline">
-                    Next
-                  </span>
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </>
-              )}
-            </Button>
+            {currentQuestion && (
+              <Options
+                question={currentQuestion}
+                setSelectedOption={submitAnswer}
+                highlightAnswer={false}
+                selectedOption={
+                  testState.answers[testState.currentQuestionIndex] !== null
+                    ? currentQuestion.options[
+                        testState.answers[testState.currentQuestionIndex]!
+                      ]
+                    : null
+                }
+              />
+            )}
+          </div>
+
+          <div>
+            {/* Progress Bar */}
+            <div className="mb-4">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm font-medium">
+                  Question {testState.currentQuestionIndex + 1} of{" "}
+                  {totalQuestions}
+                </span>
+                <Badge variant="outline">
+                  {Math.round(progress)}% Complete
+                </Badge>
+              </div>
+              <Progress value={progress} className="h-2" />
+            </div>
+
+            <Separator />
+
+            {/* Navigation */}
+            <div className="flex justify-between items-center my-2">
+              <Button
+                onClick={previousQuestion}
+                disabled={testState.currentQuestionIndex === 0}
+                variant="outline"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                <span className="text-sm font-medium hidden lg:inline">
+                  Previous
+                </span>
+              </Button>
+
+              <div className="text-sm text-muted-foreground">
+                {testState.answers.filter((answer) => answer !== null).length}{" "}
+                of {totalQuestions} answered
+              </div>
+
+              <Button
+                onClick={nextQuestion}
+                disabled={
+                  testState.answers[testState.currentQuestionIndex] === null
+                }
+              >
+                {testState.currentQuestionIndex === totalQuestions - 1 ? (
+                  <>
+                    <CheckCircle className="h-4 w-4 mr-2" />
+                    <span className="text-sm font-medium hidden lg:inline">
+                      Finish Test
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-sm font-medium hidden lg:inline">
+                      Next
+                    </span>
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </>
+                )}
+              </Button>
+            </div>
           </div>
         </div>
       </section>

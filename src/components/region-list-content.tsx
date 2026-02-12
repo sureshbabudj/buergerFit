@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   ChevronRight,
@@ -8,12 +8,16 @@ import {
   GraduationCap,
   ClipboardCheck,
 } from "lucide-react";
-import { encodeRegion, getFirstQuestionForRegion } from "@/lib/utils"; // Ensure this is available on client
+import { cn, encodeRegion, getFirstQuestionForRegion } from "@/lib/utils"; // Ensure this is available on client
+import { useQuizStore } from "@/lib/store";
 
 export default function RegionListContent({ regions }: { regions: string[] }) {
+  const chosenRegion = useQuizStore((s) => s.chosenRegion);
+  const setChosenRegion = useQuizStore((s) => s.setChosenRegion);
   const searchParams = useSearchParams();
   const mode = searchParams.get("mode");
   const isTestMode = mode === "test";
+  const router = useRouter();
 
   const content = isTestMode
     ? {
@@ -60,7 +64,18 @@ export default function RegionListContent({ regions }: { regions: string[] }) {
             <Link
               key={region}
               href={targetUrl}
-              className="group flex items-center justify-between p-5 rounded-2xl border border-border bg-card hover:border-primary transition-all active:scale-[0.98] shadow-sm"
+              onClick={(e) => {
+                e.preventDefault();
+                setChosenRegion(region);
+                router.push(targetUrl);
+              }}
+              className={cn(
+                "group flex items-center justify-between p-5 rounded-2xl border border-border bg-card hover:border-primary transition-all active:scale-[0.98] shadow-sm",
+                {
+                  "border-green-500 bg-green-500 text-white hover:border-green-500 hover:bg-green-500":
+                    chosenRegion === region,
+                },
+              )}
             >
               <div className="flex items-center gap-4">
                 <div className="p-2 rounded-xl bg-secondary group-hover:bg-primary/10 group-hover:text-primary transition-colors">

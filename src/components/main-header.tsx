@@ -5,6 +5,8 @@ import { Logo } from "./Logo";
 import { useTheme } from "@/components/theme-provider";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { cn, generateSlug, getQuestionById } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 export function MainHeader({
   className,
@@ -12,6 +14,7 @@ export function MainHeader({
 }: React.HTMLAttributes<HTMLDivElement>) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -38,8 +41,12 @@ export function MainHeader({
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
-          <nav className="hidden md:flex gap-6 text-sm font-medium text-muted-foreground">
+        <div
+          className={cn("flex items-center gap-4", {
+            hidden: pathname.startsWith("/mock-test"),
+          })}
+        >
+          <nav className="hidden md:flex gap-4 text-sm font-medium text-muted-foreground items-center">
             <Link href="/analytics" className="hover:text-primary">
               My Stats
             </Link>
@@ -49,7 +56,20 @@ export function MainHeader({
             <Link href="/#features" className="hover:text-primary">
               Features
             </Link>
+            <Link
+              href={`/learn/${generateSlug("0", getQuestionById("0").question.de)}`}
+              className="hidden md:block px-5 py-2 text-sm font-bold text-primary hover:bg-foreground hover:text-background rounded-full transition-colors"
+            >
+              Learn
+            </Link>
+            <Link
+              href="/mock-test"
+              className="hidden md:block rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground hover:opacity-90"
+            >
+              Mock test
+            </Link>
           </nav>
+
           <button
             onClick={toggleTheme}
             className="rounded-md p-2 hover:bg-secondary border border-border"
@@ -62,15 +82,9 @@ export function MainHeader({
                 <Moon size={18} />
               )
             ) : (
-              <div className="h-[18px] w-[18px]" />
+              <div className="h-4.5 w-4.5" />
             )}
           </button>
-          <Link
-            href="/mock-test"
-            className="hidden md:block rounded-full bg-foreground px-5 py-2 text-sm font-bold text-background hover:opacity-90"
-          >
-            Mock test
-          </Link>
         </div>
       </div>
     </nav>

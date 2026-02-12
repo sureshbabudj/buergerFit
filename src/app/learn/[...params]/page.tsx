@@ -177,7 +177,7 @@ export default async function QuestionPage({ params }: Props) {
         </header>
 
         {/* Progress Bar Container */}
-        <div className="shrink-0 bg-background/80 py-2 backdrop-blur-md">
+        <div className="shrink-0 bg-background/80 md:py-2 backdrop-blur-md">
           <div className="mx-auto h-1.5 w-full max-w-2xl rounded-full bg-secondary overflow-hidden px-4 md:px-0">
             <div
               className="h-full bg-primary transition-all duration-700 ease-in-out"

@@ -24,7 +24,7 @@ export default function BurgerFitLanding() {
       <header className="mx-auto max-w-7xl px-6 py-16 md:py-28 text-center md:text-left md:flex items-center gap-12">
         <div className="md:w-3/5">
           <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
-            OFFICIAL 2026 CATALOG
+            OFFICIAL CATALOG
           </div>
           <h1 className="mb-6 text-4xl font-black leading-tight tracking-tight md:text-5xl">
             Master the <br />
