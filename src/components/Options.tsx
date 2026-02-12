@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { useQuizStore } from "../lib/store";
-import type { OptionType, QuestionType } from "../types";
+import { useQuizStore } from "@/lib/store";
+import type { OptionType, QuestionType } from "@/types";
 
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -21,7 +21,8 @@ export function Options({
   const { options: actualOptions, answer } = question;
 
   const options = useMemo(() => {
-    return actualOptions.sort(() => Math.random() - 0.5);
+    // eslint-disable-next-line react-hooks/purity
+    return [...actualOptions].sort(() => Math.random() - 0.5);
   }, [actualOptions]);
 
   return (
@@ -47,7 +48,7 @@ export function Options({
                   highlightAnswer &&
                   selectedOption?.id === option.id &&
                   answer !== option.de,
-              }
+              },
             )}
           >
             <RadioGroupItem

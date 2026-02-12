@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useQuizStore } from "../lib/store";
+import React, { useEffect, useCallback } from "react";
+import { useQuizStore } from "@/lib/store";
 import questionsTeil1 from "../assets/questions";
 import {
   questionWithIds as questionsTeil2,
@@ -90,40 +90,46 @@ export function Tabs({
     { id: "teil_2", name: "2" },
   ];
 
-  const handleActiveRegion = (
-    region = chosenRegion || regions[0]
-  ): {
-    filteredQuestions: QuestionType[];
-    activeQuestion: QuestionType;
-  } => {
-    const regionIndex = regions.findIndex((r) => r === region);
-    const startIndex = regionIndex * 10;
-    const filteredQuestions = [...questionsTeil2].slice(
-      startIndex,
-      startIndex + 10
-    );
-    return {
-      filteredQuestions,
-      activeQuestion: filteredQuestions[0],
-    };
-  };
+  const handleActiveRegion = useCallback(
+    (
+      region = chosenRegion || regions[0],
+    ): {
+      filteredQuestions: QuestionType[];
+      activeQuestion: QuestionType;
+    } => {
+      const regionIndex = regions.findIndex((r) => r === region);
+      const startIndex = regionIndex * 10;
+      const filteredQuestions = [...questionsTeil2].slice(
+        startIndex,
+        startIndex + 10,
+      );
+      return {
+        filteredQuestions,
+        activeQuestion: filteredQuestions[0],
+      };
+    },
+    [chosenRegion],
+  );
 
-  const handleTeilSelection = (teil: TeilType) => {
-    reset();
-    if (teil === "teil_1") {
-      useQuizStore.setState({
-        questions: questionsTeil1,
-        currentTeil: teil,
-      });
-    } else {
-      const { filteredQuestions, activeQuestion } = handleActiveRegion();
-      useQuizStore.setState({
-        questions: filteredQuestions,
-        currentTeil: teil,
-        activeQuestionTeil2: activeQuestion,
-      });
-    }
-  };
+  const handleTeilSelection = useCallback(
+    (teil: TeilType) => {
+      reset();
+      if (teil === "teil_1") {
+        useQuizStore.setState({
+          questions: questionsTeil1,
+          currentTeil: teil,
+        });
+      } else {
+        const { filteredQuestions, activeQuestion } = handleActiveRegion();
+        useQuizStore.setState({
+          questions: filteredQuestions,
+          currentTeil: teil,
+          activeQuestionTeil2: activeQuestion,
+        });
+      }
+    },
+    [reset, handleActiveRegion],
+  );
 
   const handleRegionSelection = (region: string) => {
     reset();
@@ -135,8 +141,7 @@ export function Tabs({
 
   useEffect(() => {
     handleTeilSelection(currentTeil);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentTeil]);
+  }, [currentTeil, handleTeilSelection]);
 
   return (
     <div className={cn("flex lg:items-center gap-2", className)} {...props}>
@@ -170,7 +175,7 @@ export function Tabs({
                     onClick={() => handleRegionSelection(region)}
                     className={cn(
                       "cursor-pointer",
-                      chosenRegion === region ? "bg-blue-500 text-white" : ""
+                      chosenRegion === region ? "bg-blue-500 text-white" : "",
                     )}
                   >
                     {region}

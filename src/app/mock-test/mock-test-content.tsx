@@ -1,6 +1,8 @@
+"use client";
+
 import { useMemo, useState } from "react";
-import { useQuizStore } from "../lib/store";
-import { Header } from "@/components/Header";
+import { useQuizStore } from "@/lib/store";
+import { MainHeader } from "@/components/main-header";
 import { Question } from "@/components/Question";
 import { Options } from "@/components/Options";
 import { Button } from "@/components/ui/button";
@@ -24,7 +26,7 @@ import {
   ArrowRight,
   RotateCcw,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import type { OptionType } from "@/types";
 
 import questionsTeil1 from "@/assets/questions";
@@ -48,8 +50,8 @@ const GENERAL_QUESTIONS = 30;
 const REGIONAL_QUESTIONS = 3;
 const PASSING_SCORE = 50; // 17 out of 33 questions
 
-export function MockTestPage() {
-  const navigate = useNavigate();
+export function MockTestContent() {
+  const router = useRouter();
   const { chosenRegion, setChosenRegion, setAttemptedMockTests } =
     useQuizStore();
 
@@ -67,6 +69,7 @@ export function MockTestPage() {
     if (!chosenRegion) return [];
 
     // Get 30 random questions from Teil 1 (300 questions)
+    // eslint-disable-next-line react-hooks/purity
     const shuffledTeil1 = [...questionsTeil1].sort(() => Math.random() - 0.5);
     const selectedTeil1 = shuffledTeil1.slice(0, GENERAL_QUESTIONS);
 
@@ -74,19 +77,23 @@ export function MockTestPage() {
     const startIndex = regionIndex * 10;
     const filteredQuestions = [...questionsTeil2].slice(
       startIndex,
-      startIndex + 10
+      startIndex + 10,
     );
 
     const shuffledTeil2 = [...filteredQuestions].sort(
-      () => Math.random() - 0.5
+      // eslint-disable-next-line react-hooks/purity
+      () => Math.random() - 0.5,
     );
     const regionalQuestions = shuffledTeil2.slice(0, REGIONAL_QUESTIONS);
 
     // Combine and shuffle all questions
     const allQuestions = [...selectedTeil1, ...regionalQuestions];
-    return allQuestions
-      .sort(() => Math.random() - 0.5)
-      .map((q, i) => ({ ...q, id: String(i) }));
+    return (
+      allQuestions
+        // eslint-disable-next-line react-hooks/purity
+        .sort(() => Math.random() - 0.5)
+        .map((q, i) => ({ ...q, id: String(i) }))
+    );
   }, [chosenRegion]);
 
   const currentQuestion = mockTestQuestions[testState.currentQuestionIndex];
@@ -113,13 +120,13 @@ export function MockTestPage() {
     if (testState.isCompleted) return;
 
     const optionIndex = currentQuestion.options.findIndex(
-      (opt) => opt.id === option.id
+      (opt) => opt.id === option.id,
     );
 
     setTestState((prev) => ({
       ...prev,
       answers: prev.answers.map((answer, index) =>
-        index === prev.currentQuestionIndex ? optionIndex : answer
+        index === prev.currentQuestionIndex ? optionIndex : answer,
       ),
     }));
   };
@@ -173,7 +180,7 @@ export function MockTestPage() {
     const correctAnswers = testState.answers.filter((answer, index) => {
       const question = mockTestQuestions[index];
       const correctOptionIndex = question.options.findIndex(
-        (opt) => opt.de === question.answer
+        (opt) => opt.de === question.answer,
       );
       return answer === correctOptionIndex;
     }).length;
@@ -184,7 +191,7 @@ export function MockTestPage() {
         ? Math.round(
             (testState.endTime.getTime() - testState.startTime.getTime()) /
               1000 /
-              60
+              60,
           )
         : 0;
 
@@ -202,12 +209,9 @@ export function MockTestPage() {
   // Show region selection if no region is chosen
   if (!chosenRegion) {
     return (
-      <div className="min-h-dvh bg-background p-4">
+      <div className="h-full flex flex-col">
+        <MainHeader className="mb-10" />
         <div className="container mx-auto max-w-4xl">
-          <div className="mb-8">
-            <Header reset={() => {}} />
-          </div>
-
           <Card className="max-w-md mx-auto">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -231,7 +235,7 @@ export function MockTestPage() {
               <SelectRegion reset={() => {}} />
 
               <Button
-                onClick={() => navigate("/")}
+                onClick={() => router.push("/")}
                 variant="outline"
                 className="w-full"
               >
@@ -248,12 +252,9 @@ export function MockTestPage() {
   // Show test setup if not started
   if (!testState.startTime) {
     return (
-      <div className="min-h-dvh bg-background p-4">
+      <div className="h-full flex flex-col">
+        <MainHeader className="mb-10" />
         <div className="container mx-auto max-w-4xl">
-          <div className="mb-8">
-            <Header reset={() => {}} />
-          </div>
-
           <Card className="max-w-md mx-auto">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -296,12 +297,9 @@ export function MockTestPage() {
   // Show results
   if (testState.showResults) {
     return (
-      <div className="min-h-dvh bg-background p-4">
+      <div className="h-full flex flex-col">
+        <MainHeader className="mb-10" />
         <div className="container mx-auto max-w-4xl">
-          <div className="mb-8">
-            <Header reset={() => {}} />
-          </div>
-
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -352,7 +350,7 @@ export function MockTestPage() {
                   Retake Test
                 </Button>
                 <Button
-                  onClick={() => navigate("/")}
+                  onClick={() => router.push("/")}
                   variant="outline"
                   className="flex-1"
                 >
@@ -368,17 +366,16 @@ export function MockTestPage() {
 
   // Show test interface
   return (
-    <div className="min-h-dvh bg-background">
-      <div className="flex flex-col lg:flex-row h-dvh">
-        {/* Question Display */}
-        <section className="hidden h-dvh w-full flex-col items-center justify-center bg-[#d6ebe9] p-9 lg:flex dark:bg-zinc-900">
-          {currentQuestion && <Question question={currentQuestion} />}
-        </section>
+    <div className="flex flex-col lg:flex-row">
+      {/* Question Display */}
+      <section className="hidden h-dvh w-full flex-col items-center justify-center bg-[#d6ebe9] p-9 lg:flex dark:bg-zinc-900">
+        {currentQuestion && <Question question={currentQuestion} />}
+      </section>
 
-        {/* Test Interface */}
-        <section className="flex h-dvh w-full flex-col justify-between p-9 lg:h-auto">
-          <Header reset={() => {}} />
-
+      {/* Test Interface */}
+      <section className="flex min-h-dvh w-full flex-col lg:h-auto">
+        <MainHeader />
+        <div className="p-9 flex-1 flex flex-col justify-between">
           {/* Question */}
           <div>
             <div className="lg:hidden mb-6">
@@ -419,7 +416,7 @@ export function MockTestPage() {
             <Separator />
 
             {/* Navigation */}
-            <div className="flex justify-between items-center mt-6">
+            <div className="flex justify-between items-center my-2">
               <Button
                 onClick={previousQuestion}
                 disabled={testState.currentQuestionIndex === 0}
@@ -460,8 +457,8 @@ export function MockTestPage() {
               </Button>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

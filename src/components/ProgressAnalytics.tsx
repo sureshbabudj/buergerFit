@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useQuizStore } from "../lib/store";
+import { useQuizStore } from "@/lib/store";
 import { Progress } from "./ui/progress";
 import {
   Card,
@@ -85,7 +85,7 @@ export function QuestionInformation({
             {allQuestions.length > 0 &&
               questions.map((q, index) => {
                 const question = allQuestions.find(
-                  (a) => a.id === q.questionIndex
+                  (a) => a.id === q.questionIndex,
                 );
                 if (!question) return null;
                 return (
@@ -184,7 +184,7 @@ export function ProgressAnalytics() {
     const attemptedQuestions = Object.values(actualAttemptedQuestions).filter(
       (i) =>
         i.teil === currentTeil &&
-        (currentTeil === "teil_2" ? i.region === chosenRegion : true)
+        (currentTeil === "teil_2" ? i.region === chosenRegion : true),
     );
     const totalQuestions = questions.length;
     const attemptedQuestionsCount = Object.keys(attemptedQuestions).length;
@@ -253,16 +253,16 @@ export function ProgressAnalytics() {
 
       return {
         excellent: Object.values(actualAttemptedQuestions).filter((q) =>
-          excellentIds.includes(q.questionIndex)
+          excellentIds.includes(q.questionIndex),
         ),
         good: Object.values(actualAttemptedQuestions).filter((q) =>
-          goodIds.includes(q.questionIndex)
+          goodIds.includes(q.questionIndex),
         ),
         needs_attention: Object.values(actualAttemptedQuestions).filter((q) =>
-          needsAttentionIds.includes(q.questionIndex)
+          needsAttentionIds.includes(q.questionIndex),
         ),
         poor: Object.values(actualAttemptedQuestions).filter((q) =>
-          poorIds.includes(q.questionIndex)
+          poorIds.includes(q.questionIndex),
         ),
       };
     };
@@ -385,7 +385,7 @@ export function ProgressAnalytics() {
               Performance Breakdown
             </CardTitle>
             <CardDescription>
-              How you're performing across different categories
+              How you&apos;re performing across different categories
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -535,9 +535,10 @@ export function ProgressAnalytics() {
                       Reduce Attempts
                     </div>
                     <div className="text-sm text-yellow-700">
-                      You're averaging {analytics.averageAttempts.toFixed(1)}{" "}
-                      attempts per question. Try to understand concepts better
-                      before answering.
+                      You&apos;re averaging{" "}
+                      {analytics.averageAttempts.toFixed(1)} attempts per
+                      question. Try to understand concepts better before
+                      answering.
                     </div>
                   </div>
                 </div>
@@ -551,9 +552,9 @@ export function ProgressAnalytics() {
                       Increase Coverage
                     </div>
                     <div className="text-sm text-blue-700">
-                      You've completed {analytics.completionRate.toFixed(1)}% of
-                      questions. Try to attempt more questions to get a better
-                      understanding.
+                      You&apos;ve completed{" "}
+                      {analytics.completionRate.toFixed(1)}% of questions. Try
+                      to attempt more questions to get a better understanding.
                     </div>
                   </div>
                 </div>
@@ -567,7 +568,7 @@ export function ProgressAnalytics() {
                       Excellent Performance!
                     </div>
                     <div className="text-sm text-green-700">
-                      You're doing great with{" "}
+                      You&apos;re doing great with{" "}
                       {analytics.overallSuccessRate.toFixed(1)}% success rate.
                       Keep up the good work!
                     </div>
@@ -605,7 +606,7 @@ function calculateRecentActivity(attemptedQuestions: AttemptedQuestion[]) {
       activityByDate[date].questions += 1;
       activityByDate[date].total += data.results.length;
       activityByDate[date].correct += data.results.filter(
-        (r: boolean) => r
+        (r: boolean) => r,
       ).length;
     }
   });

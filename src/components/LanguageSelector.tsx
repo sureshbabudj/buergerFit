@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { useQuizStore } from "../lib/store";
+import { useQuizStore } from "@/lib/store";
 
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { LanguagesIcon } from "lucide-react";
